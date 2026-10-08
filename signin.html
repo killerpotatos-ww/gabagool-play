@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- Where Google's sign-in comes back to (web/gabagool_signin.js): hands the
+     ID token to the game's tab on this site, then closes. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kings &amp; Chaos</title>
+<style>
+	body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+		background: #121315; color: #e8e8ea; font: 16px system-ui, sans-serif; text-align: center; padding: 16px; }
+</style>
+</head>
+<body>
+<p>Signed in. You can close this window and go back to the game.</p>
+<script>
+(function () {
+	var p = new URLSearchParams(location.hash.slice(1) || location.search.slice(1));
+	var msg = { state: p.get("state"), id_token: p.get("id_token"), error: p.get("error") };
+	history.replaceState(null, "", location.pathname);
+	if ("BroadcastChannel" in window) {
+		new BroadcastChannel("gabagool_signin").postMessage(msg);
+	} else {
+		try { localStorage.setItem("gabagool_signin", JSON.stringify(msg)); } catch (e) {}
+	}
+	setTimeout(function () { window.close(); }, 300);
+})();
+</script>
+</body>
+</html>
