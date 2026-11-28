@@ -1,0 +1,6 @@
+{
+  "_about": "Remote config (GDD §6): the game reads it at launch, the server every few minutes. Edit, commit and push, then tools/deploy_config.sh. powers_off: power-up ids that stop dropping everywhere. limited_skins: true/false turns the limited skins' sale on or off whatever the date (null: by the date). notice: one line shown once on the title screen (empty: none).",
+  "powers_off": [],
+  "limited_skins": null,
+  "notice": ""
+}
